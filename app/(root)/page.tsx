@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button"
+import { UserButton } from "@clerk/nextjs"
 
-export default function Home() {
+const SetupPage = () => {
   return (
     <div>
       <p>Hello Admin Dashboard</p>
+      <p>This is a protected route!</p>
+      <UserButton afterSignOutUrl="/" />
       <Button
         size="sm"
         variant="destructive"
@@ -13,3 +16,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default SetupPage
