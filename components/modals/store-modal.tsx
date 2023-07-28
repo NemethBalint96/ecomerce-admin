@@ -21,14 +21,16 @@ export const StoreModal = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  type CreateFormValues = z.infer<typeof formSchema>
+
+  const form = useForm<CreateFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
     },
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: CreateFormValues) => {
     try {
       setLoading(true)
 
@@ -70,8 +72,9 @@ export const StoreModal = () => {
                   </FormItem>
                 )}
               />
-              <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+              <div className="flex w-full items-center justify-end space-x-2 pt-6">
                 <Button
+                  type="button"
                   disabled={loading}
                   variant="outline"
                   onClick={storeModal.onClose}
