@@ -1,7 +1,7 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { cn } from "@/lib/utils"
 import { useParams, usePathname } from "next/navigation"
 
 export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
@@ -33,6 +33,11 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
       href: `/${params.storeId}/colors`,
       label: "Colors",
       active: pathname === `/${params.storeId}/colors`,
+    },
+    {
+      href: `/${params.storeId}/products`,
+      label: "Products",
+      active: pathname === `/${params.storeId}/products`,
     },
     {
       href: `/${params.storeId}/settings`,
