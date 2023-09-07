@@ -7,7 +7,7 @@ export type OrderColumn = {
   phone: string
   address: string
   isPaid: boolean
-  totalPrice: number
+  totalPrice: string
   products: string
   createdAt: string
 }
