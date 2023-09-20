@@ -3,6 +3,9 @@
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { useParams, usePathname } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Menu } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname()
@@ -49,21 +52,62 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
     },
+    {
+      href: `/${params.storeId}/services`,
+      label: "Services",
+      active: pathname === `/${params.storeId}/services`,
+    },
+    {
+      href: `/${params.storeId}/transactions`,
+      label: "Transactions",
+      active: pathname === `/${params.storeId}/transactions`,
+    },
   ]
+
   return (
-    <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)}>
-      {routes.map((route) => (
-        <Link
-          href={route.href}
-          className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
-            route.active ? "text-black dark:text-white" : "text-muted-foreground"
-          )}
-          key={route.href}
-        >
-          {route.label}
-        </Link>
-      ))}
-    </nav>
+    <>
+      {/* Desktop */}
+      <nav className={cn("items-center space-x-4 hidden lg:space-x-6 lg:flex", className)}>
+        {routes.map((route) => (
+          <Link
+            href={route.href}
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-primary",
+              route.active ? "text-black dark:text-white" : "text-muted-foreground"
+            )}
+            key={route.href}
+          >
+            {route.label}
+          </Link>
+        ))}
+      </nav>
+      {/* Mobile */}
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button
+            variant="outline"
+            className="mx-4 lg:hidden"
+          >
+            <Menu size={20} />
+          </Button>
+        </SheetTrigger>
+        <SheetContent>
+          <nav className="flex flex-col space-y-4 lg:hidden">
+            {routes.map((route) => (
+              <Link
+                href={route.href}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary",
+                  route.active ? "text-black dark:text-white" : "text-muted-foreground"
+                )}
+                key={route.href}
+              >
+                {route.label}
+              </Link>
+            ))}
+          </nav>
+        </SheetContent>
+      </Sheet>
+    </>
   )
 }
