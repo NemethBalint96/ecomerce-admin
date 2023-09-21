@@ -53,7 +53,6 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ initialData }) => {
       router.push("/")
       toast.success(toastMessage)
     } catch (error) {
-      console.log(error)
       toast.error("Something went wrong.")
     } finally {
       setLoading(false)
@@ -105,7 +104,7 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ initialData }) => {
           className="space-y-8 w-full"
           onSubmit={form.handleSubmit(onSubmit)}
         >
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 gap-8">
             <FormField
               control={form.control}
               name="name"

@@ -12,7 +12,7 @@ const ServicesPage = async () => {
   if (userId) {
     services = await prismadb.service.findMany({
       where: { userId: userId },
-      orderBy: { createdAt: "desc" },
+      orderBy: { price: "asc" },
     })
   }
 

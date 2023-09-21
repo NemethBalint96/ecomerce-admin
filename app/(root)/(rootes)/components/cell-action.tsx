@@ -35,7 +35,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       router.refresh()
       toast.success("Service deleted.")
     } catch (error) {
-      toast.error("Make sure you removed all products using this size first.")
+      toast.error("Something bad happened.")
     } finally {
       setLoading(false)
       setOpen(false)

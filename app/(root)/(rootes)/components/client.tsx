@@ -3,7 +3,6 @@
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
-import { Separator } from "@/components/ui/separator"
 import { useRouter } from "next/navigation"
 import { ServiceColumn, columns } from "./columns"
 import { DataTable } from "@/components/ui/data-table"
@@ -27,11 +26,9 @@ const ServicesClient: React.FC<SizesClientProps> = ({ data }) => {
           Add New
         </Button>
       </div>
-      <Separator />
       <DataTable
         columns={columns}
         data={data}
-        searchKey="name"
       />
     </>
   )
