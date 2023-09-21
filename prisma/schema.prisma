@@ -139,3 +139,20 @@ model OrderItem {
   @@index([orderId])
   @@index([productId])
 }
+
+model Service {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String   @unique
+  price     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  price     Int
+  createdAt DateTime @default(now())
+}
