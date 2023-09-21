@@ -17,6 +17,41 @@ export async function GET(req: Request, { params }: { params: { transactionId: s
   }
 }
 
+export async function PATCH(req: Request, { params }: { params: { transactionId: string } }) {
+  try {
+    if (!params.transactionId) {
+      return new NextResponse("Transaction id is required", { status: 400 })
+    }
+
+    const { userId } = auth()
+
+    if (!userId) {
+      return new NextResponse("Unauthenticated", { status: 401 })
+    }
+
+    const body = await req.json()
+    const { name, price } = body
+
+    if (!name) {
+      return new NextResponse("Name is required", { status: 400 })
+    }
+
+    if (!price) {
+      return new NextResponse("Price is required", { status: 400 })
+    }
+
+    const transaction = await prismadb.transaction.updateMany({
+      where: { id: params.transactionId },
+      data: { name, price },
+    })
+
+    return NextResponse.json(transaction)
+  } catch (error) {
+    console.log("[TRANSACTION_PATCH]", error)
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}
+
 export async function DELETE(req: Request, { params }: { params: { storeId: string; transactionId: string } }) {
   try {
     if (!params.transactionId) {
