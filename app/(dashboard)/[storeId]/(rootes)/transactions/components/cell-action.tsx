@@ -1,7 +1,7 @@
 "use client"
 
 import { Trash2 } from "lucide-react"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { useState } from "react"
 import axios from "axios"
@@ -15,7 +15,6 @@ interface CellActionProps {
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const router = useRouter()
-  const params = useParams()
 
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
@@ -23,7 +22,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onDelete = async () => {
     try {
       setLoading(true)
-      await axios.delete(`/api/${params.storeId}/transactions/${data.id}`)
+      await axios.delete(`/api/transactions/${data.id}`)
       router.refresh()
       toast.success("Transaction deleted.")
     } catch (error) {
