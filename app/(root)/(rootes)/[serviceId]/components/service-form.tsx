@@ -50,7 +50,7 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ initialData }) => {
         await axios.post("/api/services", data)
       }
       router.refresh()
-      router.push(`/${params.storeId}/services`)
+      router.push("/")
       toast.success(toastMessage)
     } catch (error) {
       console.log(error)
@@ -65,7 +65,7 @@ export const ServiceForm: React.FC<ServiceFormProps> = ({ initialData }) => {
       setLoading(true)
       await axios.delete(`/api/services/${params.serviceId}`)
       router.refresh()
-      router.push(`/${params.storeId}/services`)
+      router.push("/")
       toast.success("Service deleted.")
     } catch (error) {
       toast.error("Something went wrong.")

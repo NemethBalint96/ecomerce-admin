@@ -13,18 +13,18 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
   const routes = [
     {
       href: "/",
-      label: "Overview",
-      active: pathname === "/",
-    },
-    {
-      href: "/services",
       label: "Services",
-      active: pathname === "/services",
+      active: pathname === "/",
     },
     {
       href: "/transactions",
       label: "Transactions",
       active: pathname === "/transactions",
+    },
+    {
+      href: "/example",
+      label: "Example overview page",
+      active: pathname === "/example",
     },
   ]
 
