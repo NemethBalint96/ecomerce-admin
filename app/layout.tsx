@@ -2,7 +2,6 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ClerkProvider } from "@clerk/nextjs"
-import { ModalProvider } from "@/providers/modal-provider"
 import { ToastProvider } from "@/providers/toast-provider"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -24,7 +23,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             enableSystem
           >
             <ToastProvider />
-            <ModalProvider />
             {children}
           </ThemeProvider>
         </body>
