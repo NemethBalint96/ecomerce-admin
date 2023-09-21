@@ -8,9 +8,9 @@ export async function GET(req: Request, { params }: { params: { serviceId: strin
       return new NextResponse("Service id is required", { status: 400 })
     }
 
-    const size = await prismadb.service.findUnique({ where: { id: params.serviceId } })
+    const service = await prismadb.service.findUnique({ where: { id: params.serviceId } })
 
-    return NextResponse.json(size)
+    return NextResponse.json(service)
   } catch (error) {
     console.log("[SERVICE_GET]", error)
     return new NextResponse("Internal error", { status: 500 })

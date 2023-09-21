@@ -3,13 +3,7 @@ import prismadb from "@/lib/prismadb"
 import ServicesClient from "./components/client"
 import { TransactionColumn } from "./components/columns"
 import { auth } from "@clerk/nextjs"
-import { Service } from "@prisma/client"
-
-interface Transaction {
-  id: string
-  service: Service
-  createdAt: Date
-}
+import { Transaction } from "@prisma/client"
 
 const TransactionsPage = async ({ params }: { params: { storeId: string } }) => {
   let transactions: Transaction[] = []
@@ -17,21 +11,13 @@ const TransactionsPage = async ({ params }: { params: { storeId: string } }) => 
   const { userId } = auth()
 
   if (userId) {
-    transactions = await prismadb.income.findMany({
-      include: { service: true },
-      where: {
-        service: {
-          userId: userId,
-        },
-      },
-      orderBy: { createdAt: "desc" },
-    })
+    transactions = await prismadb.transaction.findMany({ where: { userId: userId }, orderBy: { createdAt: "desc" } })
   }
 
   const formattedServices: TransactionColumn[] = transactions.map((item) => ({
     id: item.id,
-    name: item.service.name,
-    price: item.service.price,
+    name: item.name,
+    price: item.price,
     createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }))
 
